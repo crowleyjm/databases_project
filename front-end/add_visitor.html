@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -18,11 +18,11 @@
     </header>
     <div class="container">
         <br />
-        <h2>Explore MuseaBase Data</h2>
+        <h2>Add Visitor</h2>
         <br />
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" href="index.html">About</a>
+                <a class="nav-link" href="index.html">About</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Museums</a>
@@ -43,7 +43,7 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Visitors</a>
+                <a class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Visitors</a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="view_visitors.html">View Visitors</a>
                     <a class="dropdown-item" href="add_visitor.html">Add Visitor</a>
@@ -54,7 +54,7 @@
 			<li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Visits</a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="view_visits.html">View Visit</a>
+                    <a class="dropdown-item" href="view_visits.html">View Visits</a>
                     <a class="dropdown-item" href="add_visit.html">Add Visit</a>
                     <a class="dropdown-item" href="update_visit.html">Update Visit</a>
 					<a class="dropdown-item" href="delete_visit.html">Delete Visit</a>
@@ -64,7 +64,7 @@
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tours</a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="view_tours.html">View Tours</a>
-                    <a class="dropdown-item" href="add_tour.html">Add Tours</a>
+                    <a class="dropdown-item" href="add_tour.html">Add Tour</a>
                     <a class="dropdown-item" href="update_tour.html">Update Tour</a>
 					<a class="dropdown-item" href="delete_tour.html">Delete Tour</a>
                 </div>
@@ -77,21 +77,37 @@
                     <a class="dropdown-item" href="update_attendance.html">Update Attendance</a>
 					<a class="dropdown-item" href="delete_attendance.html">Delete Attendance</a>
                 </div>
-            </li>			
-			<div>
-			<br>
-				<h6>
-					MuseaBase facilitates and tracks interactions by Visitors with the 10 museums we manage annually.
-				</h6>		
-				<br>
-				<p>
-				We are a database driven website for use by Museums, providing the ability to store information for up to 10 types of Media,
-				up to 1,000,000 Visitors, and up to 100 Tours for each Museum under management per year. 
-				Annually, we are capable of recording 1,000,000 visits by Visitors to each Museum, and 1,000,000 attendances by Visitors on Tours at each Museum. 
-				<p>
-			</div>
-			<br>
+            </li>					
         </ul>
+			<br>
+			<br>
+			<div>
+			<form>
+				<table class="table table-primary table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">visitorID</th>				
+						<th scope="col">email</th>
+						<th scope="col">firstName</th>
+						<th scope="col">lastName</th>
+						<th scope="col">isMember</th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row"></th>
+						<td><input type="text" class="form-control" placeholder="email"></td>
+						<td><input type="text" class="form-control" placeholder="firstName"</td>
+						<td><input type="text" class="form-control" placeholder="lastName"</td>
+						<td><input type="text" class="form-control" placeholder="isMember"</td>
+						<td><button type="button" class="btn btn-primary">Add</button></td>
+					</tr>
+				</tbody>
+				</table>
+				</div>
+			</form>
+			</div>
     </div>
 <!-- jQuery, Popper.js, Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
