@@ -1,7 +1,11 @@
--- Delete Museums if already created
-SET foreign_key_checks = 0;
+-- Drop tables if they exist
+DROP TABLE IF EXISTS `Tours_Visitors`;
+DROP TABLE IF EXISTS `Museums_Visitors`;
+DROP TABLE IF EXISTS `Tours`;
+DROP TABLE IF EXISTS `Media`;
+DROP TABLE IF EXISTS `Visitors`;
 DROP TABLE IF EXISTS `Museums`;
-SET foreign_key_checks = 1;
+
 -- Create Museums table
 CREATE TABLE `Museums` (
     `museumID` INT(11) NOT NULL AUTO_INCREMENT,
@@ -12,10 +16,6 @@ CREATE TABLE `Museums` (
     PRIMARY KEY (`museumID`)
 ) ENGINE = InnoDB;
 
--- Delete Visitors if already created
-SET foreign_key_checks = 0;
-DROP TABLE IF EXISTS `Visitors`;
-SET foreign_key_checks = 1;
 -- Create Visitors table
 CREATE TABLE `Visitors` (
     `visitorID` INT(11) NOT NULL AUTO_INCREMENT,
@@ -26,10 +26,6 @@ CREATE TABLE `Visitors` (
     PRIMARY KEY (`visitorID`)
 ) ENGINE = InnoDB;
 
--- Delete Media if already created
-SET foreign_key_checks = 0;
-DROP TABLE IF EXISTS `Media`;
-SET foreign_key_checks = 1;
 -- Create Media table
 CREATE TABLE `Media` (
     `mediaID` INT(11) NOT NULL AUTO_INCREMENT,
@@ -43,10 +39,6 @@ CREATE TABLE `Media` (
         ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
--- Delete Tours if already created
-SET foreign_key_checks = 0;
-DROP TABLE IF EXISTS `Tours`;
-SET foreign_key_checks = 1;
 -- Create Tours table
 CREATE TABLE `Tours` (
     `tourID` INT(11) NOT NULL AUTO_INCREMENT,
@@ -61,10 +53,6 @@ CREATE TABLE `Tours` (
         ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
--- Delete Museums_Visitors if already created
-SET foreign_key_checks = 0;
-DROP TABLE IF EXISTS `Museums_Visitors`;
-SET foreign_key_checks = 1;
 -- Create Museums_Visitors table
 CREATE TABLE `Museums_Visitors` (
     `museumID` INT(11) NOT NULL,
@@ -77,10 +65,6 @@ CREATE TABLE `Museums_Visitors` (
         ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
--- Delete Tours_Visitors if already created
-SET foreign_key_checks = 0;
-DROP TABLE IF EXISTS `Tours_Visitors`;
-SET foreign_key_checks = 1;
 -- Create Tours_Visitors table
 CREATE TABLE `Tours_Visitors` (
     `museumID` INT(11) NOT NULL,
