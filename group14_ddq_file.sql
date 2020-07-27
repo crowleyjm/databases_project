@@ -19,10 +19,10 @@ CREATE TABLE `Visitors` (
 CREATE TABLE `Media` (
     `mediaID` INT(11) NOT NULL AUTO_INCREMENT,
     `mediaType` VARCHAR(255) NOT NULL,
-    `name` VARCHAR(255)
-    `artist` VARCHAR(255)
+    `name` VARCHAR(255),
+    `artist` VARCHAR(255),
     `mediaDate` DATE,
-    `musuemID` INT(11) NOT NULL,
+    `museumID` INT(11) NOT NULL,
     FOREIGN KEY (`museumID`) REFERENCES `Museums` (`museumID`),
     PRIMARY KEY (`mediaID`)
 ) ENGINE = InnoDB;
@@ -34,13 +34,13 @@ CREATE TABLE `Tours` (
     `price` DECIMAL(5, 2) NOT NULL,
     `capacity` INT(11) NOT NULL,
     `numberEnrolled` INT(11) NOT NULL,
-    `musuemID` INT(11) NOT NULL,
+    `museumID` INT(11) NOT NULL,
     FOREIGN KEY (`museumID`) REFERENCES `Museums` (`museumID`),
     PRIMARY KEY (`tourID`)
 ) ENGINE = InnoDB;
 
 CREATE TABLE `Museums_Visitors` (
-    `musuemID` INT(11) NOT NULL,
+    `museumID` INT(11) NOT NULL,
     FOREIGN KEY (`museumID`) REFERENCES `Museums` (`museumID`),
     `visitorID` INT(11) NOT NULL,
     FOREIGN KEY (`visitorID`) REFERENCES `Visitors` (`visitorID`),
@@ -49,7 +49,7 @@ CREATE TABLE `Museums_Visitors` (
 ) ENGINE = InnoDB;
 
 CREATE TABLE `Tours_Visitors` (
-    `musuemID` INT(11) NOT NULL,
+    `museumID` INT(11) NOT NULL,
     FOREIGN KEY (`museumID`) REFERENCES `Museums` (`museumID`),
     `visitorID` INT(11) NOT NULL,
     FOREIGN KEY (`visitorID`) REFERENCES `Visitors` (`visitorID`),
