@@ -67,11 +67,53 @@ CREATE TABLE `Museums_Visitors` (
 
 -- Create Tours_Visitors table
 CREATE TABLE `Tours_Visitors` (
-    `museumID` INT(11) NOT NULL,
+    `tourID` INT(11) NOT NULL,
     `visitorID` INT(11) NOT NULL,
-    PRIMARY KEY (`museumID`, `visitorID`),
-    FOREIGN KEY (`museumID`) REFERENCES `Museums` (`museumID`)
+    PRIMARY KEY (`tourID`, `visitorID`),
+    FOREIGN KEY (`tourID`) REFERENCES `Tours` (`tourID`)
         ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (`visitorID`) REFERENCES `Visitors` (`visitorID`)
         ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
+
+-- Insert sample data into Museums
+INSERT INTO `Museums` (`name`, `city`, `country`, `museumType`)
+VALUES
+    ('Metropolitan Museum of Art', 'New York City', 'United States', 'Art'),
+    ('National Air and Space Museum', 'Washington, D.C.', 'United States', 'Science'),
+    ('National Museum of Natural History', 'Washington, D.C.', 'United States', 'Natural History');
+
+-- Insert sample data into Visitors
+INSERT INTO `Visitors` (`email`, `firstName`, `lastName`, `isMember`)
+VALUES
+    ('john@smith.com', 'John', 'Smith', true),
+    ('jane@doe.com', 'Jane', 'Doe', true),
+    ('steve@johnson.com', 'Steve', 'Johnson', false);
+
+-- Insert sample data into Media
+INSERT INTO `Media` (`mediaType`, `name`, `artist`, `mediaDate`, `museumID`)
+VALUES
+    ('Art', 'Washington Crossing the Delaware', 'Emanuel Leutze', '1851-1-1', 1),
+    ('Fossil', 'Wankel Rex', null, null, 3),
+    ('Display', 'Apollo 11 Command Module Columbia', null, null, 2);
+
+-- Insert sample data into Tours
+INSERT INTO `Tours` (`startTime`, `endTime`, `price`, `capacity`, `numberEnrolled`, `museumID`)
+VALUES
+    ('2020-1-1 12:00:00', '2020-1-1 13:00:00', 25.00, 100, 25, 1),
+    ('2020-6-5 8:00:00', '2020-6-5 10:00:00', 40.00, 75, 42, 3),
+    ('2020-3-4 15:00:00', '2020-3-4 15:30:00', 20.00, 100, 32, 2);
+
+-- Insert sample data into Museums_Visitors
+INSERT INTO `Museums_Visitors` (`museumID`, `visitorID`, `visitDate`)
+VALUES
+    (1, 1, '2020-1-1'),
+    (2, 2, '2020-3-4'),
+    (3, 3, '2020-2-3');
+
+-- Insert sample data into Tours_Visitors
+INSERT INTO `Tours_Visitors` (`tourID`, `visitorID`)
+VALUES
+    (1, 1),
+    (3, 2),
+    (2, 3);
