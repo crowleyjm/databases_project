@@ -75,7 +75,7 @@ SELECT
     med.mediaID,
     med.name,
     med.artist,
-    med.mediaDate,
+    DATE_FORMAT(med.mediaDate, '%Y') as mediaDate,
     mus.name as Museum
 FROM
     Media as med
