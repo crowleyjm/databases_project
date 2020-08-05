@@ -65,7 +65,7 @@
 			<br>
             <div>
                 <form action="/view_tours" method="get">
-                    <label>Search Tours by price</label>
+                    <label>Search Tours by Price</label>
                     <input type="text" name="tourPrice">
                     <button type="submit" class="btn btn-primary">Search</button>
                 </form>
@@ -74,13 +74,14 @@
 			<table class="table table-primary table-hover">
 				<thead class="thead-dark">
 					<tr>
-						<th scope="col">tourID</th>
-						<th scope="col">startTime</th>
-						<th scope="col">endTime</th>
-						<th scope="col">price</th>
-						<th scope="col">capacity</th>
-						<th scope="col">numberEnrolled</th>
-						<th scope="col">museumID</th>
+						<th scope="col">ID</th>
+            <th scope="col">Date</th>
+						<th scope="col">Start Time</th>
+						<th scope="col">End Time</th>
+						<th scope="col">Price</th>
+						<th scope="col">Capacity</th>
+						<th scope="col">Enrolled</th>
+						<th scope="col">Museum</th>
                         <th></th>
                         <th></th>
 					</tr>
@@ -90,12 +91,13 @@
                     {{#each tours}}
 					<tr>
 						<th scope="row" value="tourid">{{tourID}}</th>
+            <td>{{date}}</td>
 						<td>{{startTime}}</td>
                         <td>{{endTime}}</td>
                         <td>{{price}}</td>
                         <td>{{capacity}}</td>
                         <td>{{numberEnrolled}}</td>
-                        <td>{{museumID}}</td>
+                        <td>{{museum}}</td>
                         <td><a class="btn btn-primary" href="/view_tours/{{tourID}}" role="button">Update</a></td>
                         <td><button class="btn btn-primary" onclick="deleteTour({{tourID}})">Delete</button></td>
 					</tr>

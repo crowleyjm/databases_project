@@ -42,8 +42,9 @@ CREATE TABLE `Media` (
 -- Create Tours table
 CREATE TABLE `Tours` (
     `tourID` INT(11) NOT NULL AUTO_INCREMENT,
-    `startTime` DATETIME NOT NULL,
-    `endTime` DATETIME NOT NULL,
+    `date` DATE NOT NULL,
+    `startTime` TIME NOT NULL,
+    `endTime` TIME NOT NULL,
     `price` DECIMAL(5, 2) NOT NULL,
     `capacity` INT(11) NOT NULL,
     `numberEnrolled` INT(11) NOT NULL,
@@ -98,11 +99,11 @@ VALUES
     ('Display', 'Apollo 11 Command Module Columbia', null, null, 2);
 
 -- Insert sample data into Tours
-INSERT INTO `Tours` (`startTime`, `endTime`, `price`, `capacity`, `numberEnrolled`, `museumID`)
+INSERT INTO `Tours` (`date`, `startTime`, `endTime`, `price`, `capacity`, `numberEnrolled`, `museumID`)
 VALUES
-    ('2020-1-1 12:00:00', '2020-1-1 13:00:00', 25.00, 100, 25, 1),
-    ('2020-6-5 8:00:00', '2020-6-5 10:00:00', 40.00, 75, 42, 3),
-    ('2020-3-4 15:00:00', '2020-3-4 15:30:00', 20.00, 100, 32, 2);
+    ('2020-1-1', '12:00:00', '13:00:00', 25.00, 100, 25, 1),
+    ('2020-6-5', '8:00:00', '10:00:00', 40.00, 75, 42, 3),
+    ('2020-3-4', '15:00:00', '15:30:00', 20.00, 100, 32, 2);
 
 -- Insert sample data into Museums_Visitors
 INSERT INTO `Museums_Visitors` (`museumID`, `visitorID`, `visitDate`)

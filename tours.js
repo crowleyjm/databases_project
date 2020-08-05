@@ -4,7 +4,7 @@ module.exports = function(){
 
     // get all tours
     function getTours(res, mysql, context, done){
-        var sql = "SELECT tourID, startTime, endTime, price, capacity, numberEnrolled, museumID FROM Tours";
+        var sql = "SELECT tour.tourID, DATE_FORMAT(tour.date, '%m/%d/%Y') as date, TIME_FORMAT(tour.startTime, '%h:%i %p') as startTime, TIME_FORMAT(tour.endTime, '%h:%i %p') as endTime, tour.price, tour.capacity, tour.numberEnrolled, mus.name as museum FROM Tours AS tour INNER JOIN Museums AS mus USING (museumID)";
         mysql.pool.query(sql, function(err, result, fields){
             if(err){
                 console.log(err);
@@ -12,6 +12,9 @@ module.exports = function(){
                 res.end();
             }
             context.tours = result;
+            for (const tour of context.tours) {
+                tour.price = '$' + tour.price.toFixed(2);
+            }
             console.log(context.tours);
             done();
         });
@@ -19,7 +22,7 @@ module.exports = function(){
 
     // get searched tours
     function searchTours(res, mysql, context, done, searchedTour){
-        var sql = "SELECT tourID, startTime, endTime, price, capacity, numberEnrolled, museumID FROM Tours WHERE price = " + "'" + searchedTour + "'"; //LIKE %name=?%
+        var sql = "SELECT tour.tourID, DATE_FORMAT(tour.date, '%m/%d/%Y') as date, TIME_FORMAT(tour.startTime, '%h:%i %p') as startTime, TIME_FORMAT(tour.endTime, '%h:%i %p') as endTime, tour.price, tour.capacity, tour.numberEnrolled, mus.name as museum FROM Tours AS tour INNER JOIN Museums AS mus USING (museumID) WHERE price = " + "'" + searchedTour + "'"; //LIKE %name=?%
         mysql.pool.query(sql, function(err, result, fields){
             if(err){
                 console.log(err);
@@ -35,7 +38,7 @@ module.exports = function(){
 
     // get one tour
     function getOneTour(res, mysql, context, tourID, done){
-        var sql = "SELECT tourID, startTime, endTime, price, capacity, numberEnrolled, museumID FROM Tours WHERE tourID=?";
+        var sql = "SELECT tour.tourID, DATE_FORMAT(tour.date, '%m/%d/%Y') as date, TIME_FORMAT(tour.startTime, '%h:%i %p') as startTime, TIME_FORMAT(tour.endTime, '%h:%i %p') as endTime, tour.price, tour.capacity, tour.numberEnrolled, mus.name as museum FROM Tours AS tour INNER JOIN Museums AS mus USING (museumID) WHERE tourID=?";
         var inserts = [tourID];
         mysql.pool.query(sql, inserts, function(err, result, fields){
             if(err){
@@ -57,12 +60,15 @@ module.exports = function(){
         if (tourPrice == undefined || tourPrice == "") {
             getTours(res, mysql, context, done);
         } else {
-            mysql.pool.query("SELECT tourID, startTime, endTime, price, capacity, numberEnrolled, museumID FROM Tours WHERE price LIKE '%" + req.query.tourPrice + "%'", function(err, results, fields){
+            mysql.pool.query("SELECT tour.tourID, DATE_FORMAT(tour.date, '%m/%d/%Y') as date, TIME_FORMAT(tour.startTime, '%h:%i %p') as startTime, TIME_FORMAT(tour.endTime, '%h:%i %p') as endTime, tour.price, tour.capacity, tour.numberEnrolled, mus.name as museum FROM Tours AS tour INNER JOIN Museums AS mus USING (museumID) WHERE price LIKE '%" + req.query.tourPrice + "%'", function(err, results, fields){
                 if(err){
                     res.write(JSON.stringify(err));
                     res.end();
                 }
                 context.tours = results;
+                for (const tour of context.tours) {
+                    tour.price = '$' + tour.price.toFixed(2);
+                }
                 done();
             })
         }

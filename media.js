@@ -4,7 +4,7 @@ module.exports = function(){
 
     // get all media
     function getMedia(res, mysql, context, done){
-        var sql = "SELECT mediaID, mediaType, name, artist, mediaDate, museumID FROM Media";
+        var sql = "SELECT med.mediaID, med.mediaType, med.name, med.artist, DATE_FORMAT(med.mediaDate, '%Y') AS Date, mus.name as Museum FROM Media AS med INNER JOIN Museums AS mus USING (museumID)";
         mysql.pool.query(sql, function(err, result, fields){
             if(err){
                 console.log(err);
@@ -19,7 +19,7 @@ module.exports = function(){
 
     // get searched media
     function searchMedia(res, mysql, context, done, searchedMedia){
-        var sql = "SELECT mediaID, mediaType, name, artist, mediaDate, museumID FROM Media WHERE name = " + "'" + searchedMedia + "'"; //LIKE %name=?%
+        var sql = "SELECT med.mediaID, med.mediaType, med.name, med.artist, DATE_FORMAT(med.mediaDate, '%Y') AS Date, mus.name as Museum FROM Media AS med INNER JOIN Museums AS mus USING (museumID) WHERE name = " + "'" + searchedMedia + "'"; //LIKE %name=?%
         mysql.pool.query(sql, function(err, result, fields){
             if(err){
                 console.log(err);
@@ -34,7 +34,7 @@ module.exports = function(){
 
     // get one medium
     function getMedium(res, mysql, context, mediaID, done){
-        var sql = "SELECT mediaID, mediaType, name, artist, mediaDate, museumID FROM Media WHERE mediaID=?";
+        var sql = "SELECT med.mediaID, med.mediaType, med.name, med.artist, DATE_FORMAT(med.mediaDate, '%Y') AS Date, mus.name as Museum FROM Media AS med INNER JOIN Museums AS mus USING (museumID) WHERE mediaID=?";
         var inserts = [mediaID];
         mysql.pool.query(sql, inserts, function(err, result, fields){
             if(err){
@@ -56,7 +56,7 @@ module.exports = function(){
         if (mediaName == undefined || mediaName == "") {
             getMedia(res, mysql, context, done);
         } else {
-            mysql.pool.query("SELECT mediaID, mediaType, name, artist, mediaDate, museumID FROM Media WHERE name LIKE '%" + req.query.mediaName + "%'", function(err, results, fields){
+            mysql.pool.query("SELECT med.mediaID, med.mediaType, med.name, med.artist, DATE_FORMAT(med.mediaDate, '%Y') AS Date, mus.name as Museum FROM Media AS med INNER JOIN Museums AS mus USING (museumID) WHERE name LIKE '%" + req.query.mediaName + "%'", function(err, results, fields){
                 if(err){
                     res.write(JSON.stringify(err));
                     res.end();

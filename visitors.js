@@ -4,7 +4,7 @@ module.exports = function(){
 
     // get all visitors
     function getVisitors(res, mysql, context, done){
-        var sql = "SELECT visitorID, email, firstName, lastName, isMember FROM Visitors";
+        var sql = "SELECT visitorID, email, firstName, lastName, IF(isMember, 'True', 'False') AS isMember FROM Visitors";
         mysql.pool.query(sql, function(err, result, fields){
             if(err){
                 console.log(err);
@@ -19,7 +19,7 @@ module.exports = function(){
 
     // get searched visitors
     function searchVisitors(res, mysql, context, done, searchedVisitor){
-        var sql = "SELECT visitorID, email, firstName, lastName, isMember FROM Visitors WHERE lastName = " + "'" + searchedVisitor + "'"; //LIKE %name=?%
+        var sql = "SELECT visitorID, email, firstName, lastName, IF(isMember, 'True', 'False') AS isMember FROM Visitors WHERE lastName = " + "'" + searchedVisitor + "'"; //LIKE %name=?%
         mysql.pool.query(sql, function(err, result, fields){
             if(err){
                 console.log(err);
@@ -35,7 +35,7 @@ module.exports = function(){
 
     // get one visitor
     function getVisitor(res, mysql, context, visitorID, done){
-        var sql = "SELECT visitorID, email, firstName, lastName, isMember FROM Visitors WHERE visitorID=?";
+        var sql = "SELECT visitorID, email, firstName, lastName, IF(isMember, 'True', 'False') AS isMember FROM Visitors WHERE visitorID=?";
         var inserts = [visitorID];
         mysql.pool.query(sql, inserts, function(err, result, fields){
             if(err){
@@ -57,7 +57,7 @@ module.exports = function(){
         if (visitorName == undefined || visitorName == "") {
             getVisitors(res, mysql, context, done);
         } else {
-            mysql.pool.query("SELECT visitorID, email, firstName, lastName, isMember FROM Visitors WHERE lastName LIKE '%" + req.query.visitorName + "%'", function(err, results, fields){
+            mysql.pool.query("SELECT visitorID, email, firstName, lastName, IF(isMember, 'True', 'False') AS isMember FROM Visitors WHERE lastName LIKE '%" + req.query.visitorName + "%'", function(err, results, fields){
                 if(err){
                     res.write(JSON.stringify(err));
                     res.end();
