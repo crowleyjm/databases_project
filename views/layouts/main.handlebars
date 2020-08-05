@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CS340 - Final Project</title>
+        <link rel="stylesheet" href="/static/css/styles.css">
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        {{#each jsscripts}}
+        <script src="/static/scripts/{{this}}"></script>
+        {{/each}}        
+    </head>
+    <body>
+        <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">MuseaBase</a>
+        </nav>
+        </header>
+        <div class="container">
+		</div>
+        {{{ body }}}
+    </body>
+</html>
