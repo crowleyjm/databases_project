@@ -1,11 +1,11 @@
-function updateAttendance(tourID) {
+function updateAttendance(tourID, visitorID) {
     var confirmUpdate = confirm("Do you want to update this Attendance?");
-    if(confirmUpdate){
+    if (confirmUpdate) {
         $.ajax({
-            url: '/view_attendances/'+ tourID,
+            url: '/view_attendances/tourId=' + tourID + '&visitorID=' + visitorID,
             type: 'PUT',
             data: $('#update_attendance').serialize(),
-            success: function(result){
+            success: function (result) {
                 window.location.replace("./");
                 console.log("success");
             }

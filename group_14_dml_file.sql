@@ -184,7 +184,7 @@ VALUES
 
 -- Query for viewing Tours_Visitors entries
 SELECT
-    tourID as Tour,
+    tourID,
     CONCAT_WS(', ', vis.lastName, vis.firstName) as Visitor
 FROM
     Tours_Visitors
