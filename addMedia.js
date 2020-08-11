@@ -47,7 +47,11 @@ module.exports = function () {
         if (date === '' || date.toUpperCase() === 'NULL') {
             date = null;
         }
-        var inserts = [req.body.mediaType, req.body.name, artist, date, req.body.museumID];
+        var museum = req.body.museumID;
+        if (museum === 'NULL') {
+            museum = null;
+        }
+        var inserts = [req.body.mediaType, req.body.name, artist, date, museum];
         sql = mysql.pool.query(sql, inserts, function (err, results, fields) {
             if (err) {
                 console.log(err);

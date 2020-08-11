@@ -4,7 +4,7 @@ module.exports = function () {
 
     // get all media
     function getMedia(res, mysql, context, done) {
-        var sql = "SELECT med.mediaID, med.mediaType, med.name, med.artist, DATE_FORMAT(med.mediaDate, '%Y') AS Date, mus.name as Museum FROM Media AS med INNER JOIN Museums AS mus USING (museumID)";
+        var sql = "SELECT med.mediaID, med.mediaType, med.name, med.artist, DATE_FORMAT(med.mediaDate, '%Y') AS Date, mus.name as Museum FROM Media AS med LEFT JOIN Museums AS mus USING (museumID)";
         mysql.pool.query(sql, function (err, result, fields) {
             if (err) {
                 console.log(err);
@@ -18,7 +18,7 @@ module.exports = function () {
 
     // get searched media
     function searchMedia(res, mysql, context, done, searchedMedia) {
-        var sql = "SELECT med.mediaID, med.mediaType, med.name, med.artist, DATE_FORMAT(med.mediaDate, '%Y') AS Date, mus.name as Museum FROM Media AS med INNER JOIN Museums AS mus USING (museumID) WHERE med.name LIKE ?"; //LIKE %name=?%
+        var sql = "SELECT med.mediaID, med.mediaType, med.name, med.artist, DATE_FORMAT(med.mediaDate, '%Y') AS Date, mus.name as Museum FROM Media AS med LEFT JOIN Museums AS mus USING (museumID) WHERE med.name LIKE ?"; //LIKE %name=?%
         searchedMedia = '%' + searchedMedia + '%';
         var inserts = [searchedMedia];
         mysql.pool.query(sql, inserts, function (err, result, fields) {
@@ -102,7 +102,11 @@ module.exports = function () {
         if (date === '' || date.toUpperCase() === 'NULL') {
             date = null;
         }
-        var inserts = [req.body.mediaType, req.body.name, artist, date, req.body.museumID, req.params.mediaID];
+        var museum = req.body.museumID;
+        if (museum === 'NULL') {
+            museum = null;
+        }
+        var inserts = [req.body.mediaType, req.body.name, artist, date, museum, req.params.mediaID];
         sql = mysql.pool.query(sql, inserts, function (err, result, fields) {
             if (err) {
                 console.log(err);
