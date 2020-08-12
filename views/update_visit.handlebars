@@ -87,14 +87,22 @@
               <td>
                 <select name="museumID" class="form-control">
                   {{#each museums}}
+                  {{#isEqual museumID ../visits.museumID}}
+                  <option value="{{museumID}}" selected>{{name}}</option>
+                  {{else}}
                   <option value="{{museumID}}">{{name}}</option>
+                  {{/isEqual}}
                   {{/each}}
                 </select>
               </td>
               <td>
                 <select name="visitorID" class="form-control">
                   {{#each visitors}}
+                  {{#isEqual visitorID ../visits.visitorID}}
+                  <option value="{{visitorID}}" selected>{{visitor}}</option>
+                  {{else}}
                   <option value="{{visitorID}}">{{visitor}}</option>
+                  {{/isEqual}}
                   {{/each}}
                 </select>
               </td>

@@ -74,7 +74,7 @@
       <table class="table table-primary table-hover">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">Tour (ID)</th>
+            <th scope="col">Tour</th>
             <th scope="col">Visitor</th>
             <th></th>
             <th></th>
@@ -83,7 +83,7 @@
         <tbody>
           {{#each attendances}}
           <tr>
-            <td>{{tourID}}</td>
+            <td>{{museum}}, {{date}}, {{startTime}}</td>
             <td>{{visitor}}</td>
             <td><a class="btn btn-primary" href="/view_attendances/tourID={{tourID}}&visitorID={{visitorID}}"
                 role="button">Update</a></td>

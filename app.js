@@ -4,7 +4,18 @@ const bP = require('body-parser');
 const path = require('path');
 const handleBars = require('express-handlebars').create({
     defaultLayout: 'main',
-    layoutsDir: path.join(__dirname, 'views/layouts')
+    layoutsDir: path.join(__dirname, 'views/layouts'),
+
+    // Custom helper
+    helpers: {
+        isEqual: function (value1, value2, options) {
+            if (value1 == value2) {
+                return options.fn(this);
+            } else {
+                return options.inverse(this);
+            }
+        }
+    }
 });
 
 var app = express();

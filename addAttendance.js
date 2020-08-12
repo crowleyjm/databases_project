@@ -6,7 +6,7 @@ module.exports = function () {
 
     // get all tours and visitors
     function getToursAndVisitors(res, mysql, context, done) {
-        var sql = "SELECT tourID FROM Tours";
+        var sql = "SELECT mus.name as museum, DATE_FORMAT(tour.date, '%m/%d/%Y') as date, TIME_FORMAT(tour.startTime, '%h:%i %p') as startTime, tourID FROM Tours AS tour INNER JOIN Museums AS mus USING (museumID)";
         mysql.pool.query(sql, function (err, result, fields) {
             if (err) {
                 console.log(err);

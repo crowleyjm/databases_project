@@ -49,7 +49,7 @@ module.exports = function () {
             }
             context.museums = result;
         });
-        sql = "SELECT tourID, DATE_FORMAT(date, '%Y-%m-%d') as date, TIME_FORMAT(startTime, '%H:%i') as startTime, TIME_FORMAT(endTime, '%H:%i') as endTime, price, capacity, numberEnrolled FROM Tours WHERE tourID=?";
+        sql = "SELECT tourID, DATE_FORMAT(date, '%Y-%m-%d') as date, TIME_FORMAT(startTime, '%H:%i') as startTime, TIME_FORMAT(endTime, '%H:%i') as endTime, price, capacity, numberEnrolled, museumID FROM Tours WHERE tourID=?";
         var inserts = [tourID];
         mysql.pool.query(sql, inserts, function (err, result, fields) {
             if (err) {

@@ -4,7 +4,7 @@ module.exports = function () {
 
     // get all attendances
     function getAttendances(res, mysql, context, done) {
-        var sql = "SELECT tourID, CONCAT_WS(', ', vis.lastName, vis.firstName) as visitor, visitorID FROM Tours_Visitors INNER JOIN Visitors AS vis USING (visitorID) ORDER BY tourID ASC";
+        var sql = "SELECT mus.name as museum, DATE_FORMAT(tour.date, '%m/%d/%Y') as date, TIME_FORMAT(tour.startTime, '%h:%i %p') as startTime, tourID, CONCAT_WS(', ', vis.lastName, vis.firstName) as visitor, visitorID FROM Tours_Visitors INNER JOIN Visitors AS vis USING (visitorID) INNER JOIN Tours AS tour USING (tourID) INNER JOIN Museums AS mus ON mus.museumID = tour.museumID ORDER BY tourID ASC";
         mysql.pool.query(sql, function (err, result, fields) {
             if (err) {
                 console.log(err);
@@ -18,7 +18,7 @@ module.exports = function () {
 
     // get one attendance
     function getAttendance(res, mysql, context, params, done) {
-        var sql = "SELECT tourID FROM Tours";
+        var sql = "SELECT mus.name as museum, DATE_FORMAT(tour.date, '%m/%d/%Y') as date, TIME_FORMAT(tour.startTime, '%h:%i %p') as startTime, tourID FROM Tours AS tour INNER JOIN Museums AS mus USING (museumID)";
         mysql.pool.query(sql, function (err, result, fields) {
             if (err) {
                 console.log(err);
@@ -36,7 +36,7 @@ module.exports = function () {
             }
             context.visitors = result;
         });
-        sql = "SELECT tourID, CONCAT_WS(', ', vis.lastName, vis.firstName) as visitor, visitorID FROM Tours_Visitors INNER JOIN Visitors AS vis USING (visitorID) WHERE tourID=? AND visitorID=?";
+        sql = "SELECT tourID, visitorID FROM Tours_Visitors WHERE tourID=? AND visitorID=?";
         var inserts = [params.tourID, params.visitorID];
         mysql.pool.query(sql, inserts, function (err, result, fields) {
             if (err) {

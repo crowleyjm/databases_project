@@ -89,8 +89,13 @@
               <td><input type="text" class="form-control" name="lastName" value="{{visitors.lastName}}"></td>
               <td>
                 <select name="isMember" class="form-control">
-                  <option value="1">True</option>
+                  {{#isEqual visitors.isMember "True"}}
+                  <option value="1" selected>True</option>
                   <option value="0">False</option>
+                  {{else}}
+                  <option value="1">True</option>
+                  <option value="0" selected>False</option>
+                  {{/isEqual}}
                 </select>
               </td>
             </form>

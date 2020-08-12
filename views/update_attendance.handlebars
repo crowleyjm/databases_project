@@ -74,7 +74,7 @@
       <table class="table table-primary table-hover">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">Tour (ID)</th>
+            <th scope="col">Tour</th>
             <th scope="col">Visitor</th>
             <th scope="col" style="width: 10%"></th>
           </tr>
@@ -85,14 +85,22 @@
               <td>
                 <select name="tourID" class="form-control">
                   {{#each tours}}
-                  <option value="{{tourID}}">{{tourID}}</option>
+                  {{#isEqual tourID ../attendances.tourID}}
+                  <option value="{{tourID}}" selected>{{museum}}, {{date}}, {{startTime}}</option>
+                  {{else}}
+                  <option value="{{tourID}}">{{museum}}, {{date}}, {{startTime}}</option>
+                  {{/isEqual}}
                   {{/each}}
                 </select>
               </td>
               <td>
                 <select name="visitorID" class="form-control">
                   {{#each visitors}}
+                  {{#isEqual visitorID ../attendances.visitorID}}
+                  <option value="{{visitorID}}" selected>{{visitor}}</option>
+                  {{else}}
                   <option value="{{visitorID}}">{{visitor}}</option>
+                  {{/isEqual}}
                   {{/each}}
                 </select>
               </td>

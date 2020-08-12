@@ -43,7 +43,7 @@ module.exports = function () {
             }
             context.museums = result;
         });
-        sql = "SELECT mediaID, mediaType, name, artist, DATE_FORMAT(mediaDate, '%Y-%m-%d') as mediaDate FROM Media WHERE mediaID=?";
+        sql = "SELECT mediaID, mediaType, name, artist, DATE_FORMAT(mediaDate, '%Y-%m-%d') as mediaDate, museumID FROM Media WHERE mediaID=?";
         var inserts = [mediaID];
         mysql.pool.query(sql, inserts, function (err, result, fields) {
             if (err) {
