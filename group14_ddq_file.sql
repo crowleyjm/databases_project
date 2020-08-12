@@ -22,7 +22,7 @@ CREATE TABLE `Visitors` (
     `email` VARCHAR(255) NOT NULL,
     `firstName` VARCHAR(255) NOT NULL,
     `lastName` VARCHAR(255) NOT NULL,
-    `isMember` BOOLEAN,
+    `isMember` BOOLEAN NOT NULL,
     PRIMARY KEY (`visitorID`)
 ) ENGINE = InnoDB;
 
@@ -30,10 +30,10 @@ CREATE TABLE `Visitors` (
 CREATE TABLE `Media` (
     `mediaID` INT(11) NOT NULL AUTO_INCREMENT,
     `mediaType` VARCHAR(255) NOT NULL,
-    `name` VARCHAR(255),
+    `name` VARCHAR(255) NOT NULL,
     `artist` VARCHAR(255),
     `mediaDate` DATE,
-    `museumID` INT(11) NOT NULL,
+    `museumID` INT(11),
     PRIMARY KEY (`mediaID`),
     FOREIGN KEY (`museumID`) REFERENCES `Museums` (`museumID`)
         ON DELETE CASCADE ON UPDATE CASCADE
@@ -58,7 +58,7 @@ CREATE TABLE `Tours` (
 CREATE TABLE `Museums_Visitors` (
     `museumID` INT(11) NOT NULL,
     `visitorID` INT(11) NOT NULL,
-    `visitDate` DATE,
+    `visitDate` DATE NOT NULL,
     PRIMARY KEY (`museumID`, `visitorID`, `visitDate`),
     FOREIGN KEY (`museumID`) REFERENCES `Museums` (`museumID`)
         ON DELETE CASCADE ON UPDATE CASCADE,
